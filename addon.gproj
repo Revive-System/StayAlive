@@ -1,0 +1,8 @@
+GameProject {
+ ID "StayAlive"
+ GUID "5EDB1D94A87AA78B"
+ TITLE "Stay Alive"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}
