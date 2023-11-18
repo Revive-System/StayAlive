@@ -1,4 +1,4 @@
-//#define RSA_STAY_ALIVE_FOREVER
+#define RSA_STAY_ALIVE_FOREVER
 
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : ScriptedDamageManagerComponent
