@@ -1,4 +1,4 @@
-# Stay Alive
+# Stay Alive Forever
 
 While this mod is active, players can only fall unconscious and never die.
 
