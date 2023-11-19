@@ -5,6 +5,7 @@ modded class SCR_CharacterDamageManagerComponent : ScriptedDamageManagerComponen
 {
 	protected bool m_bRSA_Initialized = false;
 	protected HitZone m_pRSA_HealthHitZone;
+	protected float m_fRSA_CriticalHealth;
 #ifndef RSA_STAY_ALIVE_FOREVER
 	protected const float RSA_UNCONSCIOUS_PROTECTION_TIMEOUT = 1000;
 #endif
@@ -27,6 +28,7 @@ modded class SCR_CharacterDamageManagerComponent : ScriptedDamageManagerComponen
 	#endif
 		GetOnDamage().Insert(RSA_OnDamage_HealthHitZoneProtection);
 		m_pRSA_HealthHitZone = GetHitZoneByName("Health");		
+		m_fRSA_CriticalHealth = m_pRSA_HealthHitZone.GetDamageStateThreshold(ECharacterHealthState.CRITICAL);
 		m_bRSA_Initialized = true;
 	}
 	
@@ -90,5 +92,15 @@ modded class SCR_CharacterDamageManagerComponent : ScriptedDamageManagerComponen
 			m_pRSA_HealthHitZone.SetHealth(1);
 			m_pResilienceHitZone.SetHealth(1);
 		};
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Check whether character health state meets requirements for consciousness
+	override protected bool ShouldBeUnconscious()
+	{
+		if (m_bRSA_Initialized && m_pRSA_HealthHitZone.GetHealthScaled() <= m_fRSA_CriticalHealth)
+			return true;
+		
+		return super.ShouldBeUnconscious();
 	}
 }
